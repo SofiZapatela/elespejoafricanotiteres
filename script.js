@@ -129,62 +129,93 @@ document.addEventListener('DOMContentLoaded', () => {
 
     premioCards.forEach(card => premioObserver.observe(card));
 
-    // --- Lightbox gallery ---
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const lightboxClose = document.getElementById('lightboxClose');
-    const lightboxPrev = document.getElementById('lightboxPrev');
-    const lightboxNext = document.getElementById('lightboxNext');
-    const galeriaItems = document.querySelectorAll('.galeria-item');
-    let currentIndex = 0;
+    // --- Gallery Slider ---
+    const sliderTrack = document.getElementById('sliderTrack');
+    const sliderItems = document.querySelectorAll('.slider-item');
+    const thumbItems = document.querySelectorAll('.thumb-item');
+    const sliderPrev = document.getElementById('sliderPrev');
+    const sliderNext = document.getElementById('sliderNext');
+    let sliderIndex = 0;
 
-    function openLightbox(index) {
-        currentIndex = index;
-        const img = galeriaItems[index].querySelector('img');
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+    function updateSlider(index) {
+        if (!sliderTrack) return;
 
-    function closeLightbox() {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-    }
+        sliderIndex = index;
+        const offset = -sliderIndex * 100;
+        sliderTrack.style.transform = `translateX(${offset}%)`;
 
-    function showPrev() {
-        currentIndex = (currentIndex - 1 + galeriaItems.length) % galeriaItems.length;
-        const img = galeriaItems[currentIndex].querySelector('img');
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-    }
-
-    function showNext() {
-        currentIndex = (currentIndex + 1) % galeriaItems.length;
-        const img = galeriaItems[currentIndex].querySelector('img');
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-    }
-
-    if (galeriaItems.length > 0) {
-        galeriaItems.forEach((item, index) => {
-            item.addEventListener('click', () => openLightbox(index));
+        // Update active classes in slider
+        sliderItems.forEach((item, i) => {
+            if (i === sliderIndex) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
         });
 
-        lightboxClose.addEventListener('click', closeLightbox);
-        lightboxPrev.addEventListener('click', showPrev);
-        lightboxNext.addEventListener('click', showNext);
+        // Update active classes in thumbnails
+        thumbItems.forEach((thumb, i) => {
+            if (i === sliderIndex) {
+                thumb.classList.add('active');
+                // Scroll thumbnail into view if needed
+                thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            } else {
+                thumb.classList.remove('active');
+            }
+        });
+    }
 
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
+    if (sliderTrack && sliderItems.length > 0) {
+        // Initialize
+        updateSlider(0);
+
+        if (sliderPrev) {
+            sliderPrev.addEventListener('click', () => {
+                const nextIndex = (sliderIndex - 1 + sliderItems.length) % sliderItems.length;
+                updateSlider(nextIndex);
+            });
+        }
+
+        if (sliderNext) {
+            sliderNext.addEventListener('click', () => {
+                const nextIndex = (sliderIndex + 1) % sliderItems.length;
+                updateSlider(nextIndex);
+            });
+        }
+
+        thumbItems.forEach((thumb, index) => {
+            thumb.addEventListener('click', () => {
+                updateSlider(index);
+            });
         });
 
+        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
-            if (!lightbox.classList.contains('active')) return;
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowLeft') showPrev();
-            if (e.key === 'ArrowRight') showNext();
+            // Only if gallery is in viewport? For now, always if keys are pressed
+            const gallerySection = document.getElementById('galeria');
+            const rect = gallerySection.getBoundingClientRect();
+            const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+
+            if (isInViewport) {
+                if (e.key === 'ArrowLeft') sliderPrev.click();
+                if (e.key === 'ArrowRight') sliderNext.click();
+            }
         });
+
+        // Touch support (simple)
+        let touchStartX = 0;
+        sliderTrack.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        sliderTrack.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                sliderNext.click();
+            } else if (touchEndX - touchStartX > 50) {
+                sliderPrev.click();
+            }
+        }, { passive: true });
     }
 
 });

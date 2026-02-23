@@ -388,40 +388,87 @@
                 <span class="section-tag">Imágenes</span>
                 <h2 class="section-title">Galería de Fotos</h2>
             </div>
+            <!-- Desktop Grid -->
             <div class="galeria-grid reveal">
-                <!-- Reemplazá estos src con las URLs de tus fotos reales -->
                 <div class="galeria-item">
-                    <img src="/public/casitas.png" alt="Foto de la obra 1" loading="lazy">
+                    <img src="public/casitas.png" alt="Foto de la obra 1" loading="lazy">
                     <div class="galeria-overlay"><span>Teatro de Sombras</span></div>
                 </div>
                 <div class="galeria-item">
-                    <img src="/public/dorel-petra-2.png" alt="Foto de la obra 2" loading="lazy">
+                    <img src="public/dorel-petra-2.png" alt="Foto de la obra 2" loading="lazy">
                     <div class="galeria-overlay"><span>Títeres de Mesa</span></div>
                 </div>
                 <div class="galeria-item">
-                    <img src="/public/dorel-y-petra.png" alt="Foto de la obra 3" loading="lazy">
+                    <img src="public/dorel-y-petra.png" alt="Foto de la obra 3" loading="lazy">
                     <div class="galeria-overlay"><span>Títeres de Mesa</span></div>
                 </div>
                 <div class="galeria-item">
-                    <img src="/public/dorel.png" alt="Foto de la obra 4" loading="lazy">
+                    <img src="public/dorel.png" alt="Foto de la obra 4" loading="lazy">
                     <div class="galeria-overlay"><span>En Escena</span></div>
                 </div>
                 <div class="galeria-item">
-                    <img src="/public/inicio.png" alt="Foto de la obra 5" loading="lazy">
+                    <img src="public/inicio.png" alt="Foto de la obra 5" loading="lazy">
                     <div class="galeria-overlay"><span>Funciones Escolares</span></div>
                 </div>
                 <div class="galeria-item">
-                    <img src="/public/silencio.png" alt="Foto de la obra 6" loading="lazy">
+                    <img src="public/silencio.png" alt="Foto de la obra 6" loading="lazy">
                     <div class="galeria-overlay"><span>Títeres de Guante</span></div>
                 </div>
             </div>
-        </div>
-        <!-- Lightbox -->
-        <div class="lightbox" id="lightbox">
-            <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">&times;</button>
-            <button class="lightbox-prev" id="lightboxPrev" aria-label="Anterior">&#10094;</button>
-            <button class="lightbox-next" id="lightboxNext" aria-label="Siguiente">&#10095;</button>
-            <img src="" alt="" class="lightbox-img" id="lightboxImg">
+
+            <!-- Mobile Slider -->
+            <div class="galeria-slider-container reveal">
+                <div class="galeria-main">
+                    <button class="slider-arrow prev" id="sliderPrev" aria-label="Anterior">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <div class="slider-track-container">
+                        <div class="slider-track" id="sliderTrack">
+                            <div class="slider-item active">
+                                <img src="public/casitas.png" alt="Foto de la obra 1" loading="lazy">
+                                <div class="slider-caption"><span>Teatro de Sombras</span></div>
+                            </div>
+                            <div class="slider-item">
+                                <img src="public/dorel-petra-2.png" alt="Foto de la obra 2" loading="lazy">
+                                <div class="slider-caption"><span>Títeres de Mesa</span></div>
+                            </div>
+                            <div class="slider-item">
+                                <img src="public/dorel-y-petra.png" alt="Foto de la obra 3" loading="lazy">
+                                <div class="slider-caption"><span>Títeres de Mesa</span></div>
+                            </div>
+                            <div class="slider-item">
+                                <img src="public/dorel.png" alt="Foto de la obra 4" loading="lazy">
+                                <div class="slider-caption"><span>En Escena</span></div>
+                            </div>
+                            <div class="slider-item">
+                                <img src="public/inicio.png" alt="Foto de la obra 5" loading="lazy">
+                                <div class="slider-caption"><span>Funciones Escolares</span></div>
+                            </div>
+                            <div class="slider-item">
+                                <img src="public/silencio.png" alt="Foto de la obra 6" loading="lazy">
+                                <div class="slider-caption"><span>Títeres de Guante</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="slider-arrow next" id="sliderNext" aria-label="Siguiente">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="galeria-thumbnails" id="sliderThumbs">
+                    <div class="thumb-item active"><img src="public/casitas.png" alt="Thumb 1"></div>
+                    <div class="thumb-item"><img src="public/dorel-petra-2.png" alt="Thumb 2"></div>
+                    <div class="thumb-item"><img src="public/dorel-y-petra.png" alt="Thumb 3"></div>
+                    <div class="thumb-item"><img src="public/dorel.png" alt="Thumb 4"></div>
+                    <div class="thumb-item"><img src="public/inicio.png" alt="Thumb 5"></div>
+                    <div class="thumb-item"><img src="public/silencio.png" alt="Thumb 6"></div>
+                </div>
+            </div>
         </div>
     </section>
 
