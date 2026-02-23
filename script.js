@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navToggle.addEventListener('click', () => {
         navToggle.classList.toggle('active');
         navLinks.classList.toggle('open');
+        navbar.classList.toggle('menu-open');
         document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
     });
 
