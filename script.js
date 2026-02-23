@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sliderNext = document.getElementById('sliderNext');
     let sliderIndex = 0;
 
-    function updateSlider(index) {
+    function updateSlider(index, smooth = true) {
         if (!sliderTrack) return;
 
         sliderIndex = index;
@@ -158,8 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
         thumbItems.forEach((thumb, i) => {
             if (i === sliderIndex) {
                 thumb.classList.add('active');
-                // Scroll thumbnail into view if needed
-                thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                if (smooth) {
+                    thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
             } else {
                 thumb.classList.remove('active');
             }
@@ -167,8 +168,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (sliderTrack && sliderItems.length > 0) {
-        // Initialize
-        updateSlider(0);
+        // Initialize without scrolling the window
+        updateSlider(0, false);
 
         if (sliderPrev) {
             sliderPrev.addEventListener('click', () => {
