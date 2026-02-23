@@ -1664,6 +1664,19 @@ ul {
         padding: 72px 0;
     }
 
+    .navbar {
+        background: #0a0a0f !important;
+        /* Constant background on mobile as requested */
+        padding: 12px 0;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-logo {
+        position: relative;
+        z-index: 1002;
+        /* Ensure logo is above the menu overlay */
+    }
+
     .nav-links {
         display: none;
         position: fixed;
@@ -1690,7 +1703,8 @@ ul {
 
     .nav-toggle {
         display: flex;
-        z-index: 1001;
+        z-index: 1002;
+        /* Ensure toggle is above the menu overlay */
     }
 
     .nav-toggle.active span:nth-child(1) {
