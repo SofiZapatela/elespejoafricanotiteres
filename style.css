@@ -65,6 +65,16 @@ body {
     line-height: 1.7;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    /* System Emoji Font Stack for better cross-device compatibility */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.icon-gold {
+    color: var(--color-gold);
+}
+
+.icon-gold-light {
+    color: var(--color-gold-light);
 }
 
 img {
@@ -1839,6 +1849,47 @@ ul {
         padding: 20px;
         font-size: 0.9rem;
     }
+
+    /* Force centering for headers and intro texts on mobile */
+    .subpage-hero .section-header,
+    .cv-header,
+    .section-header,
+    .intro-heading,
+    .memoriam-section,
+    .subpage-text p,
+    .material-content h2,
+    .material-content h3,
+    .material-content>p {
+        text-align: center !important;
+    }
+
+    /* CV Collapsibles in Trayectoria: Title Left, Arrow Right */
+    .cv-collapsible-toggle {
+        justify-content: space-between !important;
+        text-align: left !important;
+        display: flex !important;
+    }
+
+    /* Questions in Material: Centered alignment for the list block */
+    .actividades-list ul {
+        display: block;
+        max-width: fit-content;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: left !important;
+        padding-left: 20px !important;
+    }
+
+    /* Targeted left alignment for lists and technical data */
+    .cv-collapsible-content,
+    .cv-list li,
+    .actividades-list,
+    .actividades-list li,
+    .material-questions li,
+    .temas-transversales,
+    .temas-transversales li {
+        text-align: left !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -2047,8 +2098,9 @@ ul {
 }
 
 .subpage-hero .section-title {
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-size: clamp(1.6rem, 8vw, 3.5rem);
     animation: fadeInUp 0.8s ease 0.2s both;
+    word-wrap: break-word;
 }
 
 .subpage-hero .subpage-subtitle {
@@ -2433,6 +2485,8 @@ ul {
     margin-bottom: 20px;
     padding-bottom: 12px;
     border-bottom: 1px solid var(--color-border);
+    text-align: left;
+    /* Default to left for titles */
 }
 
 .cv-collapsible-toggle h4 {
@@ -2742,12 +2796,19 @@ ul {
     color: var(--color-text);
 }
 
-.material-questions {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 28px;
-    margin: 16px 0;
+.actividades-list ul {
+    list-style-type: disc;
+    margin: 12px 0 12px 20px;
+    padding: 0;
+}
+
+.actividades-list ul li {
+    padding: 4px 0;
+    border-bottom: none;
+}
+
+.actividades-list ul li::before {
+    content: none;
 }
 
 .material-questions p {
