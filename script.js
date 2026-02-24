@@ -50,11 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.1,
+        rootMargin: '0px 0px -20px 0px'
     });
 
     revealElements.forEach(el => revealObserver.observe(el));
+
+    // Fallback for reveal (if IntersectionObserver doesn't trigger in 2s)
+    setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+    }, 2000);
 
     // --- Hero particles ---
     const particlesContainer = document.getElementById('particles');
